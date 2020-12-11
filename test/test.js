@@ -1,8 +1,8 @@
 var assert = require("assert");
-import todo from "../dist/color";
+import Color from "../dist/color";
 
-describe("Package", function () {
+describe("Color", function () {
   it("works", ()=>{
-    assert.equal(todo(), 42);
+    assert.ok(new Color(1, 1, 1, 1));
   });
 });

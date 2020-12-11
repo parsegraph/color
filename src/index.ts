@@ -1,4 +1,3 @@
-// TODO Implement this.
-export default function todo() {
-  return 42;
-}
+import Color from './Color';
+
+export default Color;

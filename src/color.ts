@@ -219,9 +219,9 @@ export default class Color {
     // console.log("x3=" + x3 + ", y3=" + y3 + ", z3=" + z3);
 
     return new Color(
-        Color.SRGBCompanding(x3),
-        Color.SRGBCompanding(y3),
-        Color.SRGBCompanding(z3),
+        Color.sRGBCompanding(x3),
+        Color.sRGBCompanding(y3),
+        Color.sRGBCompanding(z3),
         this.a() + (other.a() - this.a()) * interp,
     );
   }
@@ -233,7 +233,7 @@ export default class Color {
     return Math.pow((v + 0.055) / 1.055, 2.4);
   };
 
-  static SRGBCompanding = function(v: number): number {
+  static sRGBCompanding = function(v: number): number {
     if (v <= 0.0031308) {
       return v * 12.92;
     }

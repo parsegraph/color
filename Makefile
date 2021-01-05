@@ -3,26 +3,14 @@ DIST_NAME = color
 SCRIPT_FILES = \
 	src/$(DIST_NAME).ts
 
-DECLARATION_FILES = \
-	dist/$(DIST_NAME).d.ts \
-	dist/$(DIST_NAME).d.ts.map
-
 all: build lint test coverage esdoc
 
-build: dist/$(DIST_NAME).js $(DECLARATION_FILES)
+build: dist/$(DIST_NAME).js
 .PHONY: build
 
-demo: dist/$(DIST_NAME).js $(DECLARATION_FILES)
+demo: dist/$(DIST_NAME).js
 	npm run demo
 .PHONY: demo
-
-dist/$(DIST_NAME).d.ts: dist/src/$(DIST_NAME).d.ts
-	cp -u $^ $@
-
-dist/$(DIST_NAME).d.ts.map: dist/src/$(DIST_NAME).d.ts.map
-	cp -u $^ $@
-
-dist/src/$(DIST_NAME).d.ts dist/src/$(DIST_NAME).d.ts.map: dist/$(DIST_NAME).js
 
 check:
 	npm run test
@@ -52,6 +40,7 @@ doc: esdoc
 
 dist/$(DIST_NAME).js: package.json package-lock.json $(SCRIPT_FILES)
 	npm run build
+	mv -v dist/src/* dist/
 
 clean:
 	rm -rf dist .nyc_output

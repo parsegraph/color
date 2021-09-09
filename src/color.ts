@@ -89,6 +89,20 @@ export default class Color {
     );
   }
 
+  asRGBA(): string {
+    return (
+      'rgba(' +
+      Math.round(this._r * 255) +
+      ', ' +
+      Math.round(this._g * 255) +
+      ', ' +
+      Math.round(this._b * 255) +
+      ', ' +
+      Math.round(this._a * 255) +
+      ')'
+    );
+  }
+
   luminance(): number {
     // sRGB color model.
     const x1 = Color.inverseSRGBCompanding(this.r());

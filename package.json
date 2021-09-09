@@ -1,6 +1,6 @@
 {
   "name": "parsegraph-color",
-  "version": "1.4.3-dev",
+  "version": "1.4.4-dev",
   "description": "color",
   "main": "dist/parsegraph-color.js",
   "types": "dist/parsegraph-color.d.ts",
@@ -76,5 +76,8 @@
     "raw-loader": "^4.0.1",
     "ts-mocha": "^8.0.0",
     "webgl-mock": "^0.1.7"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4"
   }
 }

@@ -12,7 +12,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "parsegraph-color.[name].js",
     globalObject: "this",
-    library: "parsegraph",
+    library: "parsegraph_color",
     libraryTarget: "umd",
   },
   module: {

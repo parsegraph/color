@@ -6,7 +6,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist-prod"),
     filename: "parsegraph-color.js",
     globalObject: "this",
-    library: "parsegraph",
+    library: "parsegraph_color",
     libraryTarget: "umd",
   },
   module: {

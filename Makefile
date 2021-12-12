@@ -16,8 +16,10 @@ DEMOS = \
 	dist/parsegraph-$(DIST_NAME).interpolate.js \
 	dist/parsegraph-$(DIST_NAME).premultiply.js
 
+LIBRARIES = dist/parsegraph-$(DIST_NAME).lib.js
+
 OUTPUTS = \
-	dist/parsegraph-$(DIST_NAME).lib.js \
+	$(LIBRARIES) \
 	$(DEMOS)
 
 all: build lint test coverage esdoc
@@ -78,7 +80,7 @@ tar: parsegraph-$(DIST_NAME)-dev.tgz
 tar-prod: parsegraph-$(DIST_NAME)-prod.tgz
 .PHONY: tar
 
-parsegraph-$(DIST_NAME)-prod.tgz: dist-prod/parsegraph-$(DIST_NAME).js
+parsegraph-$(DIST_NAME)-prod.tgz: $(LIBRARIES)
 	rm -rf parsegraph-$(DIST_NAME)
 	mkdir parsegraph-$(DIST_NAME)
 	cp -r README.md LICENSE parsegraph-$(DIST_NAME)
@@ -87,7 +89,7 @@ parsegraph-$(DIST_NAME)-prod.tgz: dist-prod/parsegraph-$(DIST_NAME).js
 	tar cvzf $@ parsegraph-$(DIST_NAME)/
 	rm -rf parsegraph-$(DIST_NAME)
 
-parsegraph-$(DIST_NAME)-dev.tgz: dist/parsegraph-$(DIST_NAME).js
+parsegraph-$(DIST_NAME)-dev.tgz: $(OUTPUTS)
 	rm -rf parsegraph-$(DIST_NAME)
 	mkdir parsegraph-$(DIST_NAME)
 	cp -r package.json package-lock.json README.md demo/ LICENSE dist/ parsegraph-$(DIST_NAME)

@@ -1,6 +1,6 @@
 {
   "name": "parsegraph-color",
-  "version": "1.4.4-dev",
+  "version": "1.4.5-dev",
   "description": "color",
   "main": "dist/parsegraph-color.js",
   "types": "dist/parsegraph-color.d.ts",

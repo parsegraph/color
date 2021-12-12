@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interpolate - Color - parsegraph</title>
+<style>
+
+.color > form {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.color > .block {
+    width: 100%;
+    height: 100px;
+    border: 1px solid black;
+}
+
+</style>
+</head>
+<body>
+    <div id="demo" style="display: flex; flex-direction: column">
+        <div style="display: flex; flex-direction: row; gap: 1em">
+            <div style="flex-grow: 1">
+            <h2>First</h2>
+            <div id="first"></div>
+            </div>
+            <div style="flex-grow: 1">
+            <h2>Second</h2>
+            <div id="second"></div>
+            </div>
+        </div>
+        <div>
+            <h2>Interpolate</h2>
+            <div id="block" style="width: 100%; height: 100px; border: 1px solid black"><span id="dest-color"></span></div>
+            <div style="display: flex; align-items: bottom">
+                <label for="interp">Interp:</label>
+                <input id="interp" type="range" min="0" max="1" step="0.01"></input>
+                <span id="interp-val"></span>
+            </div>
+        </div>
+    </div>
+    <script src="parsegraph-color.interpolate.js"></script>
+</body>
+</html>
+

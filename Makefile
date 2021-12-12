@@ -1,17 +1,34 @@
 DIST_NAME = color
 
 SCRIPT_FILES = \
-	src/$(DIST_NAME).ts
+	src/$(DIST_NAME).ts \
+	src/w3c.ts \
+	src/demo/interpolate.ts \
+	src/demo/lch.ts \
+	src/demo/colorwheel.ts \
+	src/demo/ColorChannel.ts \
+	src/demo/ColorForm.ts \
+	src/demo/premultiply.ts
+
+DEMOS = \
+	dist/parsegraph-$(DIST_NAME).lch.js \
+	dist/parsegraph-$(DIST_NAME).colorwheel.js \
+	dist/parsegraph-$(DIST_NAME).interpolate.js \
+	dist/parsegraph-$(DIST_NAME).premultiply.js
+
+OUTPUTS = \
+	dist/parsegraph-$(DIST_NAME).lib.js \
+	$(DEMOS)
 
 all: build lint test coverage esdoc
 
-build: dist/parsegraph-$(DIST_NAME).js
+build: $(OUTPUTS)
 .PHONY: build
 
 build-prod: dist-prod/parsegraph-$(DIST_NAME).js
 .PHONY: build-prod
 
-demo: dist/$(DIST_NAME).js
+demo: $(DEMOS)
 	npm run demo
 .PHONY: demo
 
@@ -41,8 +58,10 @@ esdoc:
 doc: esdoc
 .PHONY: doc
 
-dist/parsegraph-$(DIST_NAME).js: package.json package-lock.json $(SCRIPT_FILES)
+$(OUTPUTS): package.json package-lock.json $(SCRIPT_FILES)
 	npm run build
+	test ! -e dist-types/src/demo || (mkdir -p dist/demo && mv -v dist-types/src/demo/* dist/demo)
+	rm -rf dist-types/src/demo
 	mv -v dist-types/src/* dist/
 	mv dist/$(DIST_NAME).d.ts dist/parsegraph-$(DIST_NAME).d.ts
 	mv dist/$(DIST_NAME).d.ts.map dist/parsegraph-$(DIST_NAME).d.ts.map

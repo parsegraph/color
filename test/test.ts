@@ -1,9 +1,22 @@
 import { assert, expect } from "chai";
-import Color, {mix} from "../dist/parsegraph-color.lib";
+import Color, { mix } from "../src/index";
 
 describe("Color", function () {
   it("works", () => {
     assert.ok(new Color(1, 1, 1, 1));
+  });
+
+  it("has random", () => {
+    for (let i = 0; i < 100; ++i) {
+      const c = Color.random(0.5);
+      expect(c.r()).to.be.greaterThanOrEqual(0.25);
+      expect(c.g()).to.be.greaterThanOrEqual(0.25);
+      expect(c.b()).to.be.greaterThanOrEqual(0.25);
+      expect(c.r()).to.be.lessThanOrEqual(0.75);
+      expect(c.g()).to.be.lessThanOrEqual(0.75);
+      expect(c.b()).to.be.lessThanOrEqual(0.75);
+      expect(c.a()).to.equal(1);
+    }
   });
 
   it("supports asRGBA", () => {
@@ -61,7 +74,8 @@ describe("Color", function () {
     var c = r.interpolate(b, 0.5);
     assert.equal(
       c.toLCH()[0],
-      mix(r.toLCH()[0], b.toLCH()[0], .5), "Luminance must be 50"
+      mix(r.toLCH()[0], b.toLCH()[0], 0.5),
+      "Luminance must be 50"
     );
   });
 });

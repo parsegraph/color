@@ -1,18 +1,17 @@
-import ColorForm from "./ColorForm";
 import ColorChannel from "./ColorChannel";
-import Color from "../color";
+import Color from "../index";
 
 class LCHForm {
-  _container:HTMLDivElement;
-  _rgba:HTMLSpanElement;
+  _container: HTMLDivElement;
+  _rgba: HTMLSpanElement;
   _block: HTMLDivElement;
 
-  _channels:ColorChannel[];
+  _channels: ColorChannel[];
 
-  constructor(onChange:()=>void) {
-    this._channels = "Luminance Chroma Hue Alpha".split(" ").map(col=>{
-      return new ColorChannel(col, ()=>{
-        this.refresh()
+  constructor(onChange: () => void) {
+    this._channels = "Luminance Chroma Hue Alpha".split(" ").map((col) => {
+      return new ColorChannel(col, () => {
+        this.refresh();
         onChange();
       });
     });
@@ -28,20 +27,27 @@ class LCHForm {
 
     const form = document.createElement("form");
     this._container.appendChild(form);
-    this._channels.forEach(channel=>{
-      channel.elems().forEach(elem=>{
+    this._channels.forEach((channel) => {
+      channel.elems().forEach((elem) => {
         form.appendChild(elem);
       });
     });
 
     const rgba = document.createElement("label");
-    rgba.innerText = "RGBA:"
+    rgba.innerText = "RGBA:";
     this._rgba = document.createElement("span");
-    [rgba, this._rgba].forEach(elem=>form.appendChild(elem));
+    [rgba, this._rgba].forEach((elem) => form.appendChild(elem));
   }
 
   asColor() {
-    return Color.fromLCH(...(this._channels.map(chan=>chan.value()) as [number, number, number, number]));
+    return Color.fromLCH(
+      ...(this._channels.map((chan) => chan.value()) as [
+        number,
+        number,
+        number,
+        number
+      ])
+    );
   }
 
   refresh() {
@@ -55,10 +61,10 @@ class LCHForm {
   }
 }
 
-document.addEventListener("DOMContentLoaded", ()=>{
-  const refresh = ()=>{
+document.addEventListener("DOMContentLoaded", () => {
+  const refresh = () => {
     aForm.refresh();
-    const start = aForm.asColor();
+    console.log(aForm.asColor());
   };
   const aForm = new LCHForm(refresh);
 

@@ -1,15 +1,15 @@
-import Color from "../color";
+import Color from "../index";
 import ColorChannel from "./ColorChannel";
 
 export default class ColorForm {
   _block: HTMLDivElement;
-  _channels:ColorChannel[];
-  _container:HTMLDivElement;
+  _channels: ColorChannel[];
+  _container: HTMLDivElement;
 
-  constructor(onChange:()=>void) {
-    this._channels = "Red Green Blue Alpha".split(" ").map(col=>{
-      return new ColorChannel(col, ()=>{
-        this.refresh()
+  constructor(onChange: () => void) {
+    this._channels = "Red Green Blue Alpha".split(" ").map((col) => {
+      return new ColorChannel(col, () => {
+        this.refresh();
         onChange();
       });
     });
@@ -21,28 +21,35 @@ export default class ColorForm {
     this._container.appendChild(this._block);
     const form = document.createElement("form");
     this._container.appendChild(form);
-    this._channels.forEach(channel=>{
-      channel.elems().forEach(elem=>{
+    this._channels.forEach((channel) => {
+      channel.elems().forEach((elem) => {
         form.appendChild(elem);
       });
     });
 
     const lum = document.createElement("label");
-    lum.innerText = "Luminance:"
+    lum.innerText = "Luminance:";
     this._lum = document.createElement("span");
-    [lum, this._lum].forEach(elem=>form.appendChild(elem));
+    [lum, this._lum].forEach((elem) => form.appendChild(elem));
 
     const rgba = document.createElement("label");
-    rgba.innerText = "RGBA:"
+    rgba.innerText = "RGBA:";
     this._rgba = document.createElement("span");
-    [rgba, this._rgba].forEach(elem=>form.appendChild(elem));
+    [rgba, this._rgba].forEach((elem) => form.appendChild(elem));
   }
 
-  _lum:HTMLSpanElement;
-  _rgba:HTMLSpanElement;
+  _lum: HTMLSpanElement;
+  _rgba: HTMLSpanElement;
 
   asColor() {
-    return new Color(...(this._channels.map(chan=>chan.value()) as [number, number, number, number]));
+    return new Color(
+      ...(this._channels.map((chan) => chan.value()) as [
+        number,
+        number,
+        number,
+        number
+      ])
+    );
   }
 
   refresh() {
@@ -56,4 +63,3 @@ export default class ColorForm {
     return this._container;
   }
 }
-

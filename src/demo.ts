@@ -1,11 +1,11 @@
-import todo from ".";
+import Color from "./index";
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("demo");
   root.style.position = "relative";
 
   const container = document.createElement("div");
-  container.innerHTML = `${todo()}`;
+  container.innerHTML = "Click to animate";
   container.style.position = "absolute";
   container.style.left = "0px";
   container.style.top = "0px";
@@ -14,9 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
   container.style.fontSize = "18px";
   container.style.fontFamily = "sans";
   const refresh = () => {
-    const rand = () => Math.floor(Math.random() * 255);
-    document.body.style.backgroundColor = `rgb(${rand()}, ${rand()}, ${rand()})`;
-    container.style.color = `rgb(${rand()}, ${rand()}, ${rand()})`;
+    const col = Color.random();
+    document.body.style.backgroundColor = col.asRGB();
+    container.innerHTML = col.asRGB();
+    container.style.color = Color.random().asRGB();
     container.style.left = `${Math.random() * root.clientWidth}px`;
     container.style.top = `${Math.random() * root.clientHeight}px`;
   };

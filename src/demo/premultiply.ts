@@ -1,9 +1,9 @@
 import ColorForm from "./ColorForm";
 
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
   const b = document.getElementById("block");
 
-  const refresh = ()=>{
+  const refresh = () => {
     aForm.refresh();
     bForm.refresh();
     const start = aForm.asColor();
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     b.style.backgroundColor = c.asRGBA();
     const label = document.getElementById("dest-color");
     label.innerText = c.asRGBA();
-    label.style.color = c.luminance() > .3 ? "black" : "white";
+    label.style.color = c.luminance() > 0.3 ? "black" : "white";
   };
   const aForm = new ColorForm(refresh);
   const bForm = new ColorForm(refresh);

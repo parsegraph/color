@@ -1,10 +1,10 @@
 export default class ColorChannel {
-  _label:HTMLLabelElement;
-  _input:HTMLInputElement;
-  _value:HTMLInputElement;
-  _container:HTMLDivElement;
+  _label: HTMLLabelElement;
+  _input: HTMLInputElement;
+  _value: HTMLInputElement;
+  _container: HTMLDivElement;
 
-  constructor(name:string, onChange:()=>void) {
+  constructor(name: string, onChange: () => void) {
     this._label = document.createElement("label");
     this._label.innerHTML = name + ":";
     this._label.htmlFor = name + "-field";
@@ -15,7 +15,7 @@ export default class ColorChannel {
 
     this._value = document.createElement("input");
     this._value.value = this._input.value;
-    this._value.addEventListener("change", ()=>{
+    this._value.addEventListener("change", () => {
       const val = this._value.valueAsNumber;
       if (isNaN(val)) {
         return;
@@ -30,7 +30,7 @@ export default class ColorChannel {
 
     this.setBounds(0, 1, 0.01, 0.5);
 
-    this._input.addEventListener("change", ()=>{
+    this._input.addEventListener("change", () => {
       const val = this._input.valueAsNumber;
       if (isNaN(val)) {
         return;
@@ -40,7 +40,7 @@ export default class ColorChannel {
     });
   }
 
-  setBounds(min:number, max:number, step:number, val:number) {
+  setBounds(min: number, max: number, step: number, val: number) {
     this._input.min = "" + min;
     this._input.max = "" + max;
     this._input.step = "" + step;
@@ -56,4 +56,3 @@ export default class ColorChannel {
     return [this._label, this._container];
   }
 }
-

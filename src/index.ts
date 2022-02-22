@@ -1,14 +1,16 @@
 /* eslint-disable require-jsdoc */
+/* eslint-disable camelcase */
+/* eslint-disable new-cap */
 
-import {Lab_to_LCH, Lab_to_XYZ, LCH_to_Lab, XYZ_to_Lab} from "./w3c";
+import { Lab_to_LCH, Lab_to_XYZ, LCH_to_Lab, XYZ_to_Lab } from "./w3c";
 
-export const clamp = (val:number, min:number, max:number)=>{
-    return Math.min(max, Math.max(min, val));
-}
+export const clamp = (val: number, min: number, max: number) => {
+  return Math.min(max, Math.max(min, val));
+};
 
-export const mix = (a:number, b:number, interp:number)=>{
+export const mix = (a: number, b: number, interp: number) => {
   return a + (b - a) * interp;
-}
+};
 
 export default class Color {
   _r: number;
@@ -129,7 +131,7 @@ export default class Color {
     return Lab_to_LCH(XYZ_to_Lab([x1, y1, z1]));
   }
 
-  static fromLCH = (L3:number, C3: number, H3: number, a:number)=>{
+  static fromLCH = (L3: number, C3: number, H3: number, a: number) => {
     const [x3, y3, z3] = Lab_to_XYZ(LCH_to_Lab([L3, C3, H3]));
     return new Color(
       Color.sRGBCompanding(x3),
@@ -137,11 +139,11 @@ export default class Color {
       Color.sRGBCompanding(z3),
       a
     );
-  }
+  };
 
   interpolate(other: Color, interp: number): Color {
     // console.log("Interpolating");
-    interp = clamp(interp, 0, 1, );
+    interp = clamp(interp, 0, 1);
 
     const [L1, C1, H1] = this.toLCH();
     const [L2, C2, H2] = other.toLCH();
@@ -149,7 +151,7 @@ export default class Color {
     const L3: number = mix(L1, L2, interp);
     const C3: number = mix(C1, C2, interp);
     const H3: number = mix(H1, H2, interp);
-    //console.log("L3=" + L3 + ", C3=" + C3 + ", H3=" + H3);
+    // console.log("L3=" + L3 + ", C3=" + C3 + ", H3=" + H3);
 
     return Color.fromLCH(L3, C3, H3, mix(this.a(), other.a(), interp));
   }
@@ -196,6 +198,17 @@ export default class Color {
       value[1] / 255,
       value[2] / 255,
       value[3] / 255
+    );
+  };
+
+  static random = function (range: number = 1, alpha: number = 1): Color {
+    range = Math.min(Math.max(0, range), 1);
+    const clamped = 1 - range;
+    return new Color(
+      range * Math.random() + clamped / 2,
+      range * Math.random() + clamped / 2,
+      range * Math.random() + clamped / 2,
+      alpha
     );
   };
 

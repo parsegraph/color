@@ -1,24 +1,13 @@
 # Color
 
-This is for Node projects:
+This module provides a Color primitive object and associated methods
+for manipulation, querying, and output.
 
-## Setup
+    import Color from 'parsegraph-color';
 
-1. Pick a new package name.
+    for(let i = 0; i < 10; ++i) {
+        console.log(Color.random(0.1).asRGBA());
+    }
 
-2. Go to https://github.com/parsegraph/ and create a new repository using that name.
-
-3. Clone latest microproject from https://github.com/parsegraph/microproject
-
-4. Run ./update-package-name.sh with your package name:
-
-<pre>
-  # Set the package name to test
-  ./update-package-name.sh test
-</pre>
-
-5. Commit (e.g. "Give package a name")
-
-6. Push the repository to Github.
-
-See DEVELOPING.md and DEPLOYING.md
+Fundamentally, Color is stored by red, green, blue, and alpha values using
+4 floating-point channels in the range [0, 1].

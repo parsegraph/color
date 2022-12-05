@@ -108,7 +108,7 @@ export default class Color {
       ", " +
       Math.round(this._b * 255) +
       ", " +
-      Math.round(this._a * 255) +
+      this._a +
       ")"
     );
   }

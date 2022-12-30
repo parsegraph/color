@@ -47,9 +47,9 @@ describe("Color", function () {
   });
 
   it("Color.interpolate at start", function () {
-    var start = new Color(0, 0, 1);
-    var b = new Color(1, 1, 0);
-    var c = start.interpolate(b, 0);
+    const start = new Color(0, 0, 1);
+    const b = new Color(1, 1, 0);
+    const c = start.interpolate(b, 0);
     assert.equal(
       c.asRGB(),
       start.asRGB(),
@@ -58,9 +58,9 @@ describe("Color", function () {
   });
 
   it("Color.interpolate at end", function () {
-    var r = new Color(0, 0, 1);
-    var b = new Color(1, 1, 0);
-    var c = r.interpolate(b, 1);
+    const r = new Color(0, 0, 1);
+    const b = new Color(1, 1, 0);
+    const c = r.interpolate(b, 1);
     assert.equal(
       c.asRGB(),
       b.asRGB(),
@@ -69,9 +69,9 @@ describe("Color", function () {
   });
 
   it("Color.interpolate at middle", function () {
-    var r = new Color(0, 0, 1);
-    var b = new Color(1, 1, 0);
-    var c = r.interpolate(b, 0.5);
+    const r = new Color(0, 0, 1);
+    const b = new Color(1, 1, 0);
+    const c = r.interpolate(b, 0.5);
     assert.equal(
       c.toLCH()[0],
       mix(r.toLCH()[0], b.toLCH()[0], 0.5),

@@ -109,7 +109,7 @@ const webpackConfig = (prod)=>{
       modules: [relDir("src"), relDir("node_modules")]
     },
     mode: prod ? "production" : "development",
-    devtool: prod ? false : "eval-source-map",
+    devtool: prod ? "source-map" : "source-map",
   };
 };
 

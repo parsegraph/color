@@ -92,6 +92,13 @@ const webpackConfig = (prod)=>{
     extensions.push(".txt");
     extensions.push(".csv");
   }
+  rules.push(
+      {
+        test: /\.js$/,
+        enforce: "pre",
+        use: ["source-map-loader"],
+      }
+  );
 
   return {
     externals: buildExternals(),

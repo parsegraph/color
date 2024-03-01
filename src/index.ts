@@ -220,17 +220,17 @@ export default class Color {
   static fromRGB = function (rgb: string, defaultAlpha?: number) {
     // Default alpha to 255.
     if (defaultAlpha === undefined) {
-      defaultAlpha = 255;
+      defaultAlpha = 1;
     }
 
     // Extract the color from the string, as formatted in asRGB.
     const value: number[] = [];
+    rgb = rgb.trim();
     rgb
-      .trim()
-      .substring("rgb(".length, rgb.length - 1)
+      .substring(rgb.indexOf("(") + 1, rgb.length - 1)
       .split(",")
       .forEach(function (c) {
-        value.push(parseInt(c.trim()));
+        value.push(parseFloat(c.trim()));
       });
     if (value.length < 3) {
       throw new Error("Failed to parse color");
@@ -244,7 +244,7 @@ export default class Color {
       value[0] / 255,
       value[1] / 255,
       value[2] / 255,
-      value[3] / 255
+      value[3]
     );
   };
 

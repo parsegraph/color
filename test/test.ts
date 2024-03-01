@@ -37,6 +37,11 @@ describe("Color", function () {
     expect(Color.fromHex('ff00ff').asHex()).to.eql("#ff00ff");
   });
 
+  it("supports fromRGB", () => {
+    expect(Color.fromRGB('rgb(255, 255, 255)').asHex()).to.eql("#ffffff");
+    expect(Color.fromRGB('rgba(255, 255, 255, 0.5)').asRGBA()).to.eql("rgba(255, 255, 255, 0.5)");
+  });
+
   it("supports asRGBA", () => {
     expect(new Color(1, 1, 1, 1).asRGBA()).to.eql("rgba(255, 255, 255, 1)");
     expect(new Color(1, 0, 1, 1).asRGBA()).to.eql("rgba(255, 0, 255, 1)");

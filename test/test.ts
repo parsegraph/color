@@ -19,9 +19,27 @@ describe("Color", function () {
     }
   });
 
+  it("supports asHex", () => {
+    expect(new Color(1, 1, 1, 1).asHex()).to.eql("#ffffff");
+    expect(new Color(0, 1, 1, 1).asHex()).to.eql("#00ffff");
+    expect(new Color(0, 0, 1, 1).asHex()).to.eql("#0000ff");
+    expect(new Color(0, 0, 0, 1).asHex()).to.eql("#000000");
+    expect(new Color(0, 0, 1, 1).asHex()).to.eql("#0000ff");
+    expect(new Color(0, 1, 0, 1).asHex()).to.eql("#00ff00");
+    expect(new Color(1, 0, 1, 1).asHex()).to.eql("#ff00ff");
+    expect(new Color(0, 1, 1, 1).asHex()).to.eql("#00ffff");
+    expect(new Color(1, 1, 0, 1).asHex()).to.eql("#ffff00");
+  });
+
+  it("supports fromHex", () => {
+    expect(Color.fromHex('#ff6699').asHex()).to.eql("#ff6699");
+    expect(Color.fromHex('ff6699').asHex()).to.eql("#ff6699");
+    expect(Color.fromHex('ff00ff').asHex()).to.eql("#ff00ff");
+  });
+
   it("supports asRGBA", () => {
-    expect(new Color(1, 1, 1, 1).asRGBA()).to.eql("rgba(255, 255, 255, 255)");
-    expect(new Color(1, 0, 1, 1).asRGBA()).to.eql("rgba(255, 0, 255, 255)");
+    expect(new Color(1, 1, 1, 1).asRGBA()).to.eql("rgba(255, 255, 255, 1)");
+    expect(new Color(1, 0, 1, 1).asRGBA()).to.eql("rgba(255, 0, 255, 1)");
     expect(new Color(1, 1, 1, 0).asRGBA()).to.eql("rgba(255, 255, 255, 0)");
   });
 

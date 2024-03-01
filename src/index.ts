@@ -87,6 +87,53 @@ export default class Color {
     );
   }
 
+  static fromHex = function(hexStr: string): Color {
+    if (!hexStr) {
+      throw new Error("hexStr must not be null");
+    }
+    hexStr = hexStr.trim();
+    if (hexStr.startsWith("#")) {
+      hexStr = hexStr.substring(1);
+    }
+
+    let r: string;
+    let g: string;
+    let b: string;
+
+    if (hexStr.length === 6) {
+      r = hexStr.substring(0, 2);
+      g = hexStr.substring(2, 4);
+      b = hexStr.substring(4, 6);
+    } else if (hexStr.length === 3) {
+      r = hexStr.substring(0, 1);
+      g = hexStr.substring(1, 2);
+      b = hexStr.substring(2, 3);
+      r = r + r;
+      g = g + g;
+      b = b + b;
+    } else {
+      throw new Error("Invalid hexStr");
+    }
+
+    return new Color(
+      Number.parseInt(r, 16)/255,
+      Number.parseInt(g, 16)/255,
+      Number.parseInt(b, 16)/255
+    );
+  };
+
+  asHex(): string {
+    const channel = (val) => {
+      let rv = Math.max(0, Math.min(255, Math.round(val * 255))).toString(16);
+      if (rv.length < 2) {
+        rv = "0" + rv;
+      }
+      return rv;
+    };
+
+    return `#${channel(this.r())}${channel(this.g())}${channel(this.b())}`
+  }
+
   asRGB(): string {
     return (
       "rgb(" +

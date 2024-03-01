@@ -28,9 +28,9 @@ export default class Color {
       throw new Error("Color must be given initial component values.");
     }
     this._r = Math.min(1, Math.max(0, r));
-    this._g = Math.min(1, Math.max(0, g));
-    this._b = Math.min(1, Math.max(0, b));
-    this._a = Math.min(1, Math.max(0, a));
+    this._g = Math.min(1, Math.max(0, g as number));
+    this._b = Math.min(1, Math.max(0, b as number));
+    this._a = Math.min(1, Math.max(0, a as number));
   }
 
   r(): number {
@@ -123,7 +123,7 @@ export default class Color {
   };
 
   asHex(): string {
-    const channel = (val) => {
+    const channel = (val: number) => {
       let rv = Math.max(0, Math.min(255, Math.round(val * 255))).toString(16);
       if (rv.length < 2) {
         rv = "0" + rv;
@@ -219,7 +219,7 @@ export default class Color {
 
   static fromRGB = function (rgb: string, defaultAlpha?: number) {
     // Default alpha to 255.
-    if (arguments.length === 1) {
+    if (defaultAlpha === undefined) {
       defaultAlpha = 255;
     }
 
